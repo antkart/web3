@@ -1,0 +1,182 @@
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f3f4f6;
+    color: #111;
+}
+
+.page-header {
+    text-align: center;
+    padding: 18px 12px;
+}
+
+.container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    padding: 0 12px 28px;
+}
+
+
+.inline-messages {
+    width: 100%;
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0;
+    list-style: none;
+}
+
+.inline-messages li {
+    margin: 0 0 8px;
+    padding: 10px 12px;
+    border: 1px solid #d0d0d0;
+    border-radius: 6px;
+    background: #fff;
+}
+
+
+.main-layout {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 18px;
+}
+
+
+.panel {
+    background: #fff;
+    border: 1px solid #cfcfcf;
+    border-radius: 6px;
+    padding: 16px 18px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+
+.panel-title {
+    margin: 0 0 14px;
+    font-size: 18px;
+    text-align: center;
+}
+
+.form-panel {
+    width: 380px;
+    max-width: calc(100vw - 24px);
+}
+
+.canvas-panel {
+    width: 520px;
+    max-width: calc(100vw - 24px);
+    text-align: center;
+}
+
+/* Form grid */
+.param-grid {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
+
+
+.param-label {
+    width: 56px;
+    padding-right: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+    vertical-align: top;
+}
+
+.param-field {
+    vertical-align: top;
+}
+
+.full-width {
+    width: 100%;
+}
+
+
+.form-panel .ui-selectonemenu {
+    width: 100% !important;
+}
+.form-panel .ui-selectonemenu .ui-selectonemenu-label {
+    width: 100% !important;
+}
+
+/* X slider (PrimeFaces) */
+.x-slider-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.x-slider-value {
+    width: 100%;
+    text-align: center;
+    font-weight: 700;
+}
+
+/* make slider stable */
+.x-slider.ui-slider {
+    margin: 0 6px;
+}
+
+/* Buttons */
+.buttons {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.buttons .ui-button {
+    width: 160px;
+}
+
+/* Nav */
+.nav {
+    margin-top: 12px;
+    text-align: center;
+}
+
+/* Canvas */
+#myCanvas {
+    border: 1px solid #000;
+    background: #fff;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Results */
+.results-title {
+    margin: 0;
+    font-size: 20px;
+}
+
+.table-wrap {
+    width: 100%;
+    max-width: 980px;
+    overflow-x: auto;
+}
+
+.result-table {
+    width: 980px;
+    border-collapse: collapse;
+    background: #fff;
+}
+
+.result-table th,
+.result-table td {
+    border: 1px solid #cfcfcf;
+    padding: 8px 10px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.result-table th {
+    background: #e9f7e9;
+    color: #0b6b0b;
+    font-weight: 800;
+}

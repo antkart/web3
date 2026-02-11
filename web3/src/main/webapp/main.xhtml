@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+<h:head>
+   <meta charset="UTF-8"/>
+   <title>Лабораторная: Попадание точки</title>
+   <h:outputStylesheet library="css" name="style.css"/>
+</h:head>
+
+<h:body>
+
+   <header class="page-header">
+      <p><b>Картомышев Антон Романович · P3213 · Вариант: 1745</b></p>
+   </header>
+
+   <div class="container">
+
+      <h:form id="mainForm">
+
+
+         <p:messages id="msgs"
+                     showSummary="true"
+                     showDetail="false"
+                     closable="true"
+                     styleClass="inline-messages"/>
+
+
+         <div class="main-layout">
+
+
+            <section class="panel form-panel">
+               <h3 class="panel-title">Ввод параметров</h3>
+
+               <div class="form-fields">
+
+   <!-- R -->
+   <div class="field-block">
+      <h:outputLabel for="r" value="R" styleClass="field-label"/>
+      <p:selectOneMenu id="r" value="#{pointBean.r}" label="R"
+                       required="true"
+                       requiredMessage="Выберите R"
+                       converterMessage="R должен быть числом"
+                       validatorMessage="Выберите корректное значение R"
+                       styleClass="full-width"
+                       onchange="drawGraph();">
+         <f:selectItem itemLabel="1" itemValue="1"/>
+         <f:selectItem itemLabel="1.5" itemValue="1.5"/>
+         <f:selectItem itemLabel="2" itemValue="2"/>
+         <f:selectItem itemLabel="2.5" itemValue="2.5"/>
+         <f:selectItem itemLabel="3" itemValue="3"/>
+      </p:selectOneMenu>
+   </div>
+
+   <!-- X -->
+   <div class="field-block">
+      <h:outputLabel for="x" value="X" styleClass="field-label"/>
+      <h:panelGroup layout="block" styleClass="x-slider-wrap">
+         <p:inputText id="x" value="#{pointBean.x}" label="x"
+                      required="true"
+                      requiredMessage="Введите x"
+                      converterMessage="Введите x числом"
+                      validatorMessage="Введите x от -2 до 2"
+                      styleClass="x-slider-value"
+                      onkeydown="return false;" onpaste="return false;" ondrop="return false;">
+         <f:validateDoubleRange minimum="-2" maximum="2"/>
+         </p:inputText>
+         <p:slider for="x" minValue="-2" maxValue="2" step="1" styleClass="x-slider"/>
+      </h:panelGroup>
+   </div>
+
+   <!-- Y -->
+   <div class="field-block">
+      <h:outputLabel for="y" value="Y" styleClass="field-label"/>
+      <p:inputText id="y" value="#{pointBean.y}" label="y"
+                   required="true"
+                   requiredMessage="Введите y"
+                   converterMessage="Введите y числом"
+                   validatorMessage="Введите y от -3 до 3"
+                   pt:placeholder="-3..3" styleClass="full-width">
+         <f:validateDoubleRange minimum="-3" maximum="3"/>
+      </p:inputText>
+   </div>
+
+</div>
+
+               <div class="buttons">
+                  <p:commandButton value="Отправить"
+                                   action="#{pointBean.submit}"
+                                   process="@form"
+                                   update=":mainForm:resultsTable :mainForm:pointsJson :mainForm:msgs"
+                                   oncomplete="afterAjaxUpdate();"/>
+               </div>
+
+
+               <p:remoteCommand name="sendPoint"
+                                actionListener="#{pointBean.submitFromCanvas}"
+                                process="@this"
+                                update=":mainForm:resultsTable :mainForm:pointsJson :mainForm:msgs"
+                                oncomplete="afterAjaxUpdate();"/>
+
+
+               <h:inputHidden id="pointsJson" value="#{resultsBean.pointsJson}"/>
+            </section>
+
+
+            <section class="panel canvas-panel">
+               <h3 class="panel-title">График (кликни по области)</h3>
+               <canvas id="myCanvas" width="420" height="420"></canvas>
+            </section>
+
+         </div>
+
+         <h3 class="results-title">Результаты (только текущая сессия)</h3>
+
+         <div class="table-wrap">
+            <h:dataTable id="resultsTable"
+                         value="#{resultsBean.all}"
+                         var="rr"
+                         styleClass="result-table">
+
+               <h:column>
+                  <f:facet name="header">X</f:facet>
+                  #{rr.x}
+               </h:column>
+
+               <h:column>
+                  <f:facet name="header">Y</f:facet>
+                  #{rr.y}
+               </h:column>
+
+               <h:column>
+                  <f:facet name="header">R</f:facet>
+                  #{rr.r}
+               </h:column>
+
+               <h:column>
+                  <f:facet name="header">Попадание</f:facet>
+                  #{rr.hit ? 'Попадает' : 'Не попадает'}
+               </h:column>
+
+               <h:column>
+                  <f:facet name="header">Текущее время</f:facet>
+                  #{rr.currentTime}
+               </h:column>
+
+               <h:column>
+                  <f:facet name="header">Время исполнения</f:facet>
+                  #{rr.execTime}
+               </h:column>
+
+            </h:dataTable>
+         </div>
+
+         <div class="nav">
+            <h:link value="Вернуться на стартовую страницу" outcome="toStart"/>
+         </div>
+
+      </h:form>
+
+   </div>
+
+   <h:outputScript library="js" name="graph.js"/>
+
+</h:body>
+</html>

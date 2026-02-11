@@ -1,0 +1,7 @@
+com/example/web3/listener/DerbyShutdownListener.class
+com/example/web3/service/AreaChecker.class
+com/example/web3/HelloServlet.class
+com/example/web3/beans/ResultsBean.class
+com/example/web3/beans/ClockBean.class
+com/example/web3/beans/PointBean.class
+com/example/web3/model/ResultRow.class
